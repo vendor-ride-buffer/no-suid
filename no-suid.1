@@ -1,0 +1,88 @@
+'\" t
+.\"      Title: no-suid
+.\"     Author: [see the "AUTHOR(S)" section]
+.\"  Generator: Hand Written
+.\"       Date: 2025-01-08 (8 January 2025)
+.\"     Manual: User Commands
+.\"     Source: Package of no-suid / no-sgid
+.\"   Language: English
+
+.TH "NO-SUID" "1" "2025-01-08" "Package of no\-suid / no\-sgid" "User Commands"
+.SH "NAME"
+.sp
+\fBno\-suid\fR - determine if command executed as SUID or not.
+.SH "SYNOPSIS"
+.sp
+\fBno\-suid\fR
+.sp
+Ignores all command line arguments, environment variables, and files.
+Never prints output.
+SUID status is reported by exit value.
+.SH "DESCRIPTION"
+.sp
+\fBno\-suid\fR is a basic security check.
+When a command is SUID (Set-User-ID) it runs with the privileges of its owner, such as root,
+even when it is launched by a generally unprivileged user.
+.sp
+The \fBno\-suid\fR command exists so that scripts, or other commands without strong interfaces to the POSIX C system,
+can easily check that they are NOT running with SUID.
+.sp
+SUID can be done securely but doing so requires developers to to be aware when elivated privileges are available.
+.SH "ARGUMENTS, ENVIRONMENT, AND FILES"
+.sp
+Ignores all command arguments, environment variable, and files.
+Does not read STDIN or write to STDOUT or STDERR.
+This choice has been made so as to, mitigate the possibility of \fBno\-suid\fR introducing a security vulnerability itself.
+.sp
+\fBImportantly\fR the lack of command argument support means even familiar options which users expect, will be silently ignored.
+For example,
+.sp
+.RS
+[\fI\-h\fR|\fI\-\-help\fR]
+.sp
+[\fI\-v\fR|\fI\-\-version\fR]
+.RE
+.sp
+See the section EXIT STATUS for command output.
+.sp
+.SH TIMEOUT
+.sp
+Normally \fBno\-suid\fR gets a definitive answer rapidly.
+In exceptional cases the command eventully timesout after around a second.
+Incase this happens Exit Status is the same as if SUID was found.
+.SH "EXIT STATUS"
+.sp
+Exits 0 (Success) if definitly \fBNOT\fR SUID.
+Otherwise Exits 1 (Failure).
+.SH "EXAMPLES"
+.sp
+\fBno\-suid\fR || echo \[aq]Security Alert!\[aq]
+.sp
+\fBno\-suid\fR && echo \[aq]All is well, here.\[aq]
+.SH "CAVIATES"
+.sp
+Every effort is being made to insure that this command preforms as it should but it remains to be rigourusly tested.
+Even if it works perfectly, checking for the presence/absents of SUID is only one small piece of securely programming a POSIX system.
+Please double check your assumptions are valid and proceed cautiously.
+.SH "AUTHORITATIVE"
+.sp
+If documentation is written in multiple languages or data formats, how are discrepancies to be handled?
+.SH CONTRIBUTING
+.sp
+How can users help?
+.SH "SEE ALSO"
+.sp
+.BR no-sgid (1)
+NOT WRITTEN,
+.BR suid (?),
+.BR effectiveuid (?),
+.BR realuid (?),
+.SH "AUTHOR(S)"
+.sp
+alphawhiskey <alphawhiskey@example.com>
+.SH "COPYRIGHT"
+.sp
+© 2024, 2025 alphawhiskey
+.SH "LICENSE"
+.sp
+…
